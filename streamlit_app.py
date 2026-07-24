@@ -10,7 +10,7 @@ from datetime import datetime
 # =====================================================
 
 st.set_page_config(
-    page_title="QAS-99 Evalvator",
+    page_title="QAS-99 Evalvacija",
     page_icon="📋",
     layout="wide"
 )
@@ -290,7 +290,7 @@ if "history" not in st.session_state:
 st.markdown(
 """
 <h1 style="text-align:center;">
-📋 QAS-99 Evaluator vprašanj
+📋 QAS-99 Evalvacija vprašanj
 </h1>
 """,
 unsafe_allow_html=True

@@ -332,8 +332,6 @@ else
             st.divider()
 
 
-            st.divider()
-
 
             st.subheader(
                 "Predlagano vprašanje"

@@ -161,11 +161,6 @@ Odgovorite IZKLJUČNO v JSON formatu:
 
 
 {
-"improvement_needed":"DA/NE",
-
-"reason":
-"Kratek razlog",
-
 "improved_question":
 "Izboljšano vprašanje",
 
@@ -337,41 +332,7 @@ else
             st.divider()
 
 
-
-            if result["improvement_needed"]=="DA":
-
-
-                st.markdown(
-                """
-                <div class="warning-box">
-
-                ⚠️ <b>Izboljšava je priporočljiva</b>
-
-                </div>
-                """,
-                unsafe_allow_html=True
-                )
-
-
-                st.write(
-                    result["reason"]
-                )
-
-
-            else:
-
-
-                st.markdown(
-                """
-                <div class="success-box">
-
-                ✅ <b>Pomembne izboljšave niso potrebne</b>
-
-                </div>
-                """,
-                unsafe_allow_html=True
-                )
-
+            st.divider()
 
 
             st.subheader(

@@ -107,33 +107,41 @@ Vaša naloga ni izdelava poročila, ampak izboljšanje vprašanja.
 Interno preverite naslednje vidike:
 
 1. Branje vprašanja
-- Ali je vprašanje jasno in enostavno za branje?
+- Ali je vprašanje jasno in enostavno za branje? 
+- Ali vprašanje vsebuje vse potrebne informacije?
 
 2. Navodila
-- Ali manjkajo pomembne informacije?
+- So navodila dovolj točna in jasna?
+- Je karkoli v navodilih nepojasnjeno?
 
 3. Jasnost
-- Ali obstajajo dvoumnosti?
-- Ali so uporabljeni nerazumljivi izrazi?
-- Ali manjka referenčno obdobje?
+- Ali je vprašanje predolgo ali slovnično nepravilno?
+- Ali so uporabljeni nerazumljivi, preveč strokovni ali nepoojasnjeni izrazi?
+- Ali manjka referenčno obdobje? 
+- Je referenčno odbobje dovolj natančno definirano?
+- Ima vprašanje več možnih interpretacij?
 
 4. Predpostavke
-- Ali vprašanje vsebuje neupravičene predpostavke?
-- Ali je dvojno vprašanje?
+- Ali vprašanje vsebuje neupravičene/napačne predpostavke o respondentu?
+- Je v posamičnem vprašanju zajetih več vprašanj?
 
 5. Spomin in znanje
-- Ali lahko respondent realno odgovori?
-- Ali zahteva preveč spomina ali računanja?
+- Ali je verjetno, da respondent pozna podatke za odgovor?
+- Ali odgovor zahteva preveč spomina ali računanja?
+- Ali je verjetno, da se respondent spomni podatkov?
 
 6. Občutljivost
-- Ali formulacija povzroča pristranskost?
+- Ali sprašujemo po telo privatnih ali potencialno sramotnih podatkih?
+- Ali je besedilo vprišanja prilagojeno občutljivosti vprašanja?
+- Ali z obliko/besedilom vprašanja namigujemo na družbeno sprejemljiv odgovor?
 
-7. Odgovorne kategorije
-- Ali so kategorije:
-  - ustrezne,
-  - popolne,
-  - neprekrivajoče,
-  - jasno zapisane?
+7. Kategorije odgovorov
+- Se kategorije odgovorov prekrivajo? 
+- So kategorije odgovorov ustrezne/smiselne glede na vprašanje?
+- So vključene vse možne kategorije odgovorov?
+- So kategorije odgovorov dovolj jasne?
+- So kategorije odgovorov prepodrobne/presplošne?
+- Je vrstni red kategorij odgovorov smiseln? 
 
 
 Na podlagi analize odločite:
@@ -150,7 +158,8 @@ in predlog naj bo enak originalnemu vprašanju.
 
 improvement_needed = "DA"
 
-Predlagajte izboljšano verzijo vprašanja.
+Predlagajte izboljšano verzijo vprašanja, pri čemer se bodo odpravile vse težave. Predlagaj dve ali tri metodološko ustrezne verzije, ki se lahko razlikujejo le v ubeseditvi. 
+Pri predlaganju upoštevaj zgornji kontrolni seznam vprašanj. 
 
 
 Če so problematične odgovorne kategorije,

@@ -2,11 +2,132 @@ import streamlit as st
 from openai import OpenAI
 import json
 
+# ============================================================
+# PAGE CONFIG
+# ============================================================
+
+st.set_page_config(
+    page_title="QAS-99 – Izboljšava anketnih vprašanj",
+    page_icon="📊",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
+
+# ============================================================
+# SURS OBLIKOVANJE
+# ============================================================
+
+st.markdown(
+    """
+    <style>
+
+    .main .block-container {
+        padding-top: 1.5rem;
+        padding-bottom: 3rem;
+        max-width: 1200px;
+    }
+
+    .surs-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 18px;
+        margin-bottom: 35px;
+        border-bottom: 2px solid #0078A8;
+    }
+
+    .app-title {
+        font-size: 32px;
+        font-weight: 700;
+        color: #1F2937;
+        margin-bottom: 6px;
+    }
+
+    .app-subtitle {
+        font-size: 16px;
+        color: #6B7280;
+        margin-bottom: 32px;
+    }
+
+    textarea {
+        border-radius: 8px !important;
+    }
+
+    .stButton > button {
+        border-radius: 7px;
+        font-weight: 600;
+        min-height: 45px;
+    }
+
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
+# ============================================================
+# SURS GLAVA
+# ============================================================
+
+col_logo, col_right = st.columns([3, 1])
+
+with col_logo:
+
+    st.image(
+        "surs_logo.png",
+        width=230
+    )
+
+with col_right:
+
+    st.markdown(
+        """
+        <div style="
+            text-align: right;
+            padding-top: 10px;
+            color: #6B7280;
+            font-size: 14px;
+        ">
+            Metodologija anketnega<br>
+            raziskovanja
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+st.markdown(
+    "<div class='surs-header'></div>",
+    unsafe_allow_html=True
+)
+
+
+# ============================================================
+# NASLOV APLIKACIJE
+# ============================================================
+
+st.markdown(
+    """
+    <div class="app-title">
+        Izboljšava anketnih vprašanj
+    </div>
+
+    <div class="app-subtitle">
+        Ocenjevanje in izboljšava vprašanj po metodologiji QAS-99
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+
+# ============================================================
+# GROQ CLIENT
+# ============================================================
+
 client = OpenAI(
     api_key=st.secrets["GROQ_API_KEY"],
     base_url="https://api.groq.com/openai/v1"
 )
-
 
 # ============================================================
 # SYSTEM PROMPT

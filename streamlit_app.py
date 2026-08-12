@@ -474,7 +474,8 @@ else
 
 
             result_text=response.choices[0].message.content
-
+            st.write("ODGOVOR MODELA:")
+            st.code(repr(result_text))
 
 
             result_text=result_text.replace(

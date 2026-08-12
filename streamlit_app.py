@@ -1,17 +1,9 @@
 import streamlit as st
-import json
 from openai import OpenAI
-from dotenv import load_dotenv
-import os
-
-# ============================================================
-# NASTAVITVE
-# ============================================================
-
-load_dotenv()
+import json
 
 client = OpenAI(
-    api_key=os.getenv("OPENAI_API_KEY")
+    api_key=st.secrets["OPENAI_API_KEY"]
 )
 
 

@@ -1,101 +1,25 @@
 import streamlit as st
-from openai import OpenAI
 import json
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
 
+# ============================================================
+# NASTAVITVE
+# ============================================================
 
-# =====================================================
-# PAGE CONFIG
-# =====================================================
-
-st.set_page_config(
-    page_title="QAS-99 izboljševalnik vprašanj",
-    page_icon="📋",
-    layout="centered"
-)
-
-
-# =====================================================
-# CSS
-# =====================================================
-
-st.markdown(
-"""
-<style>
-
-.main {
-    padding-top:2rem;
-}
-
-
-h1 {
-    color:#1f4e79;
-    text-align:center;
-}
-
-
-.stButton button {
-
-    background-color:#1f4e79;
-    color:white;
-    font-weight:600;
-    border-radius:8px;
-
-}
-
-
-.result-box {
-
-background:#eef5fb;
-border-left:6px solid #1f4e79;
-padding:20px;
-border-radius:8px;
-
-}
-
-
-.success-box {
-
-background:#f1fff4;
-border-left:6px solid #198754;
-padding:20px;
-border-radius:8px;
-
-}
-
-
-.warning-box {
-
-background:#fff7ef;
-border-left:6px solid #fd7e14;
-padding:20px;
-border-radius:8px;
-
-}
-
-</style>
-""",
-unsafe_allow_html=True
-)
-
-
-
-# =====================================================
-# GROQ CLIENT
-# =====================================================
+load_dotenv()
 
 client = OpenAI(
-    api_key=st.secrets["GROQ_API_KEY"],
-    base_url="https://api.groq.com/openai/v1"
+    api_key=os.getenv("OPENAI_API_KEY")
 )
 
 
-
-# =====================================================
-# QAS-99 PROMPT
-# =====================================================
+# ============================================================
+# SYSTEM PROMPT
+# ============================================================
 
 SYSTEM_PROMPT = """
-
 Si strokovnjak za metodologijo anketiranja in oblikovanje vprašalnikov. Tvoja naloga je evalvacija osnutkov anketnih vprašanj in njihovih kategorij odgovorov z uporabo sistema presoje vprašanj RTI (Question Appraisal System – QAS-99) (glej Willis, G. in Lesser, J. T. (1999). Question Appraisal System: QAS-99. Rockville: Research Triangle Institute).
 
 QAS je metoda za sistematično presojo anketnih vprašanj, ki omogoča prepoznavanje težav v formulaciji ali strukturi vprašanj ter kategorijah odgovorov, ki lahko povzročijo težave pri izvedbi ankete ali predstavljajo izzive za respondente pri izvajanju kognitivnih procesov, potrebnih za odgovarjanje na vprašanja.
@@ -307,110 +231,130 @@ Predlagaj tri popravljene verzije vprašanja z odpravljenimi težavami.
 Če so tudi kategorije odgovorov neustrezne, odpravi težave in predlagaj izboljšane kategorije.
 
 
-Odgovorite IZKLJUČNO v JSON formatu:
 
+============================================================
+FORMAT KONČNEGA ODGOVORA
+============================================================
+
+Po opravljeni analizi po QAS-99 moraš na koncu vrniti rezultate
+v obliki veljavnega JSON-a.
+
+Pomembno:
+
+- Ne odstranjuj ali izpuščaj nobenega dela zgornjih navodil.
+- Analizo po QAS-99 izvedi na podlagi vseh zgornjih navodil.
+- Uporabniku ne prikazuj razlage analize.
+- Končni odgovor mora biti IZKLJUČNO veljaven JSON.
+- Pred JSON-om ne dodajaj nobenega besedila.
+- Za JSON-om ne dodajaj nobenega besedila.
+- Ne uporabljaj Markdown oznak.
+- Ne uporabljaj ```json ali ``` oznak.
+- Ne dodajaj uvoda, zaključka ali komentarjev.
+
+Vrni 2 do 3 različne smiselne predloge izboljšanega vprašanja.
+
+Uporabi natanko naslednjo strukturo:
 
 {
   "results": [
     {
-      "improved_question": "Izboljšano vprašanje 1",
+      "improved_question": "izboljšano vprašanje 1",
       "improved_categories": [
-        "odgovor 1",
-        "odgovor 2"
+        "kategorija odgovora 1",
+        "kategorija odgovora 2"
       ]
     },
     {
-      "improved_question": "Izboljšano vprašanje 2",
+      "improved_question": "izboljšano vprašanje 2",
       "improved_categories": [
-        "odgovor 3",
-        "odgovor 4"
+        "kategorija odgovora 1",
+        "kategorija odgovora 2"
       ]
     },
     {
-      "improved_question": "Izboljšano vprašanje 3",
+      "improved_question": "izboljšano vprašanje 3",
       "improved_categories": [
-        "odgovor 5",
-        "odgovor 6"
+        "kategorija odgovora 1",
+        "kategorija odgovora 2"
       ]
     }
   ]
 }
 
+Vsak element v "results" mora vsebovati:
+
+1. "improved_question"
+   - izboljšano oziroma popravljeno vprašanje;
+
+2. "improved_categories"
+   - ustrezne kategorije odgovorov za to vprašanje.
+
+Če vprašanje ne potrebuje bistvenega izboljšanja, ga lahko ohraniš
+oziroma minimalno spremeniš.
+
+Kategorije odgovorov morajo biti smiselne glede na vprašanje,
+medsebojno čim bolj izključujoče in skupaj pokrivati relevantne
+možne odgovore.
+
+Če gre za odprto vprašanje, uporabi:
+
+"improved_categories": []
+
+Ne vračaj nobenega dodatnega besedila izven JSON strukture.
+
+Vedno vrni veljaven JSON.
 """
 
 
+# ============================================================
+# NASLOV APLIKACIJE
+# ============================================================
 
-# =====================================================
-# TITLE
-# =====================================================
+st.title("🔍 Izboljšava anketnih vprašanj")
 
-st.markdown(
-"""
-<h1>
-📋 QAS-99 izboljševalnik vprašanj
-</h1>
-""",
-unsafe_allow_html=True
+st.write(
+    "Vnesite anketno vprašanje in po potrebi kategorije odgovorov. "
+    "Vprašanje bo analizirano po metodologiji QAS-99."
 )
 
 
-st.markdown(
-"""
-<div class="result-box">
-
-Orodje pregleda anketno vprašanje po metodologiji
-<b>QAS-99</b> in predlaga izboljšano formulacijo,
-če zazna potencialne metodološke težave.
-
-</div>
-""",
-unsafe_allow_html=True
-)
-
-
-
-st.divider()
-
-
-
-# =====================================================
-# INPUT
-# =====================================================
-
+# ============================================================
+# VNOS VPRAŠANJA
+# ============================================================
 
 question = st.text_area(
-    "Vnesite vprašanje",
-    height=120,
-    placeholder=
-    "Primer: Kako pogosto uporabljate splet?"
+    "Anketno vprašanje",
+    placeholder="Vnesite vprašanje ...",
+    height=120
 )
 
 
+# ============================================================
+# VNOS KATEGORIJ
+# ============================================================
 
 categories = st.text_area(
-    "Vnesite kategorije odgovorov",
-    height=120,
-    placeholder=
-"""
-Vsak dan
-Večkrat tedensko
-Redko
-Nikoli
-"""
+    "Kategorije odgovorov",
+    placeholder=(
+        "Vnesite kategorije odgovorov, vsako v svojo vrstico "
+        "(če gre za odprto vprašanje, pustite prazno)."
+    ),
+    height=150
 )
 
 
-
-# =====================================================
-# BUTTON
-# =====================================================
-
+# ============================================================
+# GUMB
+# ============================================================
 
 if st.button(
     "🔍 Izboljšaj vprašanje",
     use_container_width=True
 ):
 
+    # --------------------------------------------------------
+    # PREVERJANJE VPRAŠANJA
+    # --------------------------------------------------------
 
     if not question.strip():
 
@@ -421,13 +365,14 @@ if st.button(
         st.stop()
 
 
+    # --------------------------------------------------------
+    # PRIPRAVA PROMPTA
+    # --------------------------------------------------------
 
-    prompt=f"""
-
+    prompt = f"""
 VPRAŠANJE:
 
 {question}
-
 
 KATEGORIJE ODGOVOROV:
 
@@ -437,17 +382,18 @@ if categories.strip()
 else
 "Odprto vprašanje"
 }
-
 """
 
+
+    # --------------------------------------------------------
+    # KLIC MODELA
+    # --------------------------------------------------------
 
     with st.spinner(
         "Analiziram vprašanje po QAS-99..."
     ):
 
-
         try:
-
 
             response = client.chat.completions.create(
 
@@ -458,13 +404,13 @@ else
                 messages=[
 
                     {
-                    "role":"system",
-                    "content":SYSTEM_PROMPT
+                        "role": "system",
+                        "content": SYSTEM_PROMPT
                     },
 
                     {
-                    "role":"user",
-                    "content":prompt
+                        "role": "user",
+                        "content": prompt
                     }
 
                 ]
@@ -472,61 +418,197 @@ else
             )
 
 
+            # ------------------------------------------------
+            # PREBERI ODGOVOR MODELA
+            # ------------------------------------------------
 
-            result_text=response.choices[0].message.content
-            st.write("ODGOVOR MODELA:")
-            st.code(repr(result_text))
-
-
-            result_text=result_text.replace(
-                "```json",
-                ""
-            ).replace(
-                "```",
-                ""
-            ).strip()
+            result_text = response.choices[0].message.content
 
 
+            # ------------------------------------------------
+            # PREVERI PRAZEN ODGOVOR
+            # ------------------------------------------------
 
-            result=json.loads(
-                result_text
-            )
+            if not result_text:
 
-
-
-            st.divider()
-
-
-
-            st.subheader(
-                "Predlagano vprašanje"
-            )
-
-
-            st.info(
-                result["improved_question"]
-            )
-
-
-
-            if result["improved_categories"]:
-
-
-                st.subheader(
-                    "Predlagane kategorije odgovorov"
+                raise ValueError(
+                    "Model je vrnil prazen odgovor."
                 )
 
 
-                for cat in result["improved_categories"]:
+            # ------------------------------------------------
+            # ODSTRANI MOREBITNE MARKDOWN OZNAKE
+            # ------------------------------------------------
 
-                    st.write(
-                        "- " + cat
+            result_text = (
+                result_text
+                .replace("```json", "")
+                .replace("```", "")
+                .strip()
+            )
+
+
+            # ------------------------------------------------
+            # PRETVORBA JSON
+            # ------------------------------------------------
+
+            try:
+
+                result = json.loads(
+                    result_text
+                )
+
+            except json.JSONDecodeError as e:
+
+                st.error(
+                    "Model ni vrnil veljavnega JSON-a."
+                )
+
+                st.code(
+                    result_text,
+                    language="text"
+                )
+
+                st.stop()
+
+
+            # ------------------------------------------------
+            # PREVERJANJE STRUKTURE JSON-A
+            # ------------------------------------------------
+
+            if "results" not in result:
+
+                st.error(
+                    "Odgovor modela nima pričakovane strukture "
+                    "'results'."
+                )
+
+                st.code(
+                    json.dumps(
+                        result,
+                        ensure_ascii=False,
+                        indent=2
+                    ),
+                    language="json"
+                )
+
+                st.stop()
+
+
+            if not isinstance(
+                result["results"],
+                list
+            ):
+
+                st.error(
+                    "Polje 'results' mora biti seznam."
+                )
+
+                st.stop()
+
+
+            if len(result["results"]) == 0:
+
+                st.error(
+                    "Model ni vrnil nobenega predloga."
+                )
+
+                st.stop()
+
+
+            # ------------------------------------------------
+            # PRIKAZ REZULTATOV
+            # ------------------------------------------------
+
+            st.divider()
+
+            st.subheader(
+                "💡 Predlagane izboljšave"
+            )
+
+
+            # ------------------------------------------------
+            # POSAMEZNI PREDLOGI
+            # ------------------------------------------------
+
+            for i, suggestion in enumerate(
+                result["results"],
+                start=1
+            ):
+
+                st.markdown(
+                    f"### Predlog {i}"
+                )
+
+
+                # --------------------------------------------
+                # PREVERI VPRAŠANJE
+                # --------------------------------------------
+
+                improved_question = suggestion.get(
+                    "improved_question",
+                    ""
+                )
+
+
+                if improved_question:
+
+                    st.info(
+                        improved_question
+                    )
+
+                else:
+
+                    st.warning(
+                        "Predlog nima navedenega vprašanja."
                     )
 
 
+                # --------------------------------------------
+                # KATEGORIJE ODGOVOROV
+                # --------------------------------------------
+
+                improved_categories = suggestion.get(
+                    "improved_categories",
+                    []
+                )
+
+
+                if improved_categories:
+
+                    st.markdown(
+                        "**Predlagane kategorije odgovorov:**"
+                    )
+
+
+                    for cat in improved_categories:
+
+                        st.write(
+                            f"- {cat}"
+                        )
+
+                else:
+
+                    st.caption(
+                        "Odprto vprašanje – kategorije odgovorov "
+                        "niso predlagane."
+                    )
+
+
+                # --------------------------------------------
+                # LOČNICA
+                # --------------------------------------------
+
+                if i < len(result["results"]):
+
+                    st.divider()
+
+
+        # ====================================================
+        # NAPAKA
+        # ====================================================
 
         except Exception as e:
-
 
             st.error(
                 f"Napaka pri analizi: {e}"

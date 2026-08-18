@@ -414,7 +414,7 @@ st.title("Izboljšava anketnih vprašanj")
 
 st.write(
     "Vnesite anketno vprašanje in po potrebi kategorije odgovorov. "
-    "Vprašanje bo analizirano po metodologiji QAS-99 (Willis in Lesser, 1999).
+    "Vprašanje bo analizirano po metodologiji QAS-99 (Willis in Lesser, 1999)."
 )
 
 

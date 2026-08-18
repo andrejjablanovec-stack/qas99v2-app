@@ -70,7 +70,7 @@ st.markdown(
 # SURS GLAVA
 # ============================================================
 
-col_logo, col_left = st.columns([3, 1])
+col_logo, col_empty = st.columns([3, 1])
 
 with col_logo:
 
@@ -79,15 +79,15 @@ with col_logo:
         width=230
     )
 
-with col_left:
-
     st.markdown(
         """
         <div style="
-            text-align: left;
-            padding-top: 10px;
+            margin-top: -12px;
+            margin-left: 2px;
             color: #6B7280;
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.2px;
         ">
             Oddelek za sprejemanje podatkov
         </div>

@@ -84,7 +84,7 @@ with col_left:
     st.markdown(
         """
         <div style="
-            text-align: right;
+            text-align: left;
             padding-top: 10px;
             color: #6B7280;
             font-size: 14px;

@@ -85,7 +85,7 @@ with col_logo:
             margin-top: -12px;
             margin-left: 2px;
             color: #6B7280;
-            font-size: 13px;
+            font-size: 18px;
             font-weight: 500;
             letter-spacing: 0.2px;
         ">

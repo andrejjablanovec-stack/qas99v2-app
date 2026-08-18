@@ -448,7 +448,7 @@ categories = st.text_area(
 # ============================================================
 
 if st.button(
-    "🔍 Izboljšaj vprašanje",
+    "Izboljšaj vprašanje",
     use_container_width=True
 ):
 

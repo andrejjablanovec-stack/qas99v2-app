@@ -497,7 +497,7 @@ else
 
             response = client.chat.completions.create(
 
-                model="openrouter/free",
+                model= "gpt-oss-20b",
 
                 temperature=0.1,
 

@@ -70,7 +70,7 @@ st.markdown(
 # SURS GLAVA
 # ============================================================
 
-col_logo, col_right = st.columns([3, 1])
+col_logo, col_left = st.columns([3, 1])
 
 with col_logo:
 
@@ -79,7 +79,7 @@ with col_logo:
         width=230
     )
 
-with col_right:
+with col_left:
 
     st.markdown(
         """

@@ -89,8 +89,7 @@ with col_right:
             color: #6B7280;
             font-size: 14px;
         ">
-            Metodologija anketnega<br>
-            raziskovanja
+            Oddelek za sprejemanje podatkov
         </div>
         """,
         unsafe_allow_html=True

@@ -623,7 +623,7 @@ else
             st.divider()
 
             st.subheader(
-                "💡 Predlagane izboljšave"
+                "Predlagane izboljšave"
             )
 
 

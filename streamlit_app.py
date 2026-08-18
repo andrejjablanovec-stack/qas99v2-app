@@ -105,19 +105,6 @@ st.markdown(
 # NASLOV APLIKACIJE
 # ============================================================
 
-st.markdown(
-    """
-    <div class="app-title">
-        Izboljšava anketnih vprašanj
-    </div>
-
-    <div class="app-subtitle">
-        Ocenjevanje in izboljšava vprašanj po metodologiji QAS-99
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
 
 # ============================================================
 # GROQ CLIENT
@@ -423,7 +410,7 @@ Vedno vrni veljaven JSON.
 # NASLOV APLIKACIJE
 # ============================================================
 
-st.title("🔍 Izboljšava anketnih vprašanj")
+st.title("Izboljšava anketnih vprašanj")
 
 st.write(
     "Vnesite anketno vprašanje in po potrebi kategorije odgovorov. "

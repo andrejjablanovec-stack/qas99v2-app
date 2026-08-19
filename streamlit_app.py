@@ -499,7 +499,7 @@ else
 
                 model= "gpt-oss-20b",
 
-                temperature=1.0,
+                temperature=2.0,
 
                 messages=[
 

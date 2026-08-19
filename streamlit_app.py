@@ -126,11 +126,11 @@ QAS je metoda za sistematično presojo anketnih vprašanj, ki omogoča prepoznav
 
 Pet glavnih faz kognitivne obdelave pri odgovarjanju na anketna vprašanja je:
 
-razumevanje vprašanja in priklic informacij iz spomina, potrebnih za odgovor;
-razumevanje vprašanja in naloge odgovarjanja;
-priklic potrebnih informacij iz spomina;
-oblikovanje presoje na podlagi priklicanih informacij;
-odločanje o načinu poročanja odgovora in izbira ustrezne kategorije odgovora.
+- razumevanje vprašanja in priklic informacij iz spomina, potrebnih za odgovor;
+- razumevanje vprašanja in naloge odgovarjanja;
+- priklic potrebnih informacij iz spomina;
+- oblikovanje presoje na podlagi priklicanih informacij;
+- odločanje o načinu poročanja odgovora in izbira ustrezne kategorije odgovora.
 
 Vaša naloga je pregledati anketna vprašanja in jih ovrednotiti z uporabo sistema QAS. Pri tem upoštevajte posamezne značilnosti vprašanja in kategorij odgovorov po posameznih korakih.
 
@@ -138,8 +138,8 @@ Pri vsakem koraku presodite, ali vprašanje vsebuje značilnosti, ki bi lahko po
 
 Za izvedbo evalvacije morate upoštevati:
 
-formulacijo vprašanja;
-kategorije odgovorov;
+- formulacijo vprašanja;
+- kategorije odgovorov;
 
 ter za vsak korak določiti, ali je prisotna težava (DA ali NE), in v primeru odgovora DA potem v končnem predlogu vprašanja to napako odpraviti. 
 1. KORAK: BRANJE (READING)
